@@ -23,5 +23,5 @@ not be edited. The sources for the theme are in `src/theme`.
 The theme can be built using `gulp theme:build`. To rebuild the theme when changes to the local source files are made,
 run `gulp theme:watch`.
 
-To test the changes, setup a [PaperDocs](https://github.com/PaperDocs/PaperDocs) workspace and install your local
+To test the changes, setup a [PaperDocs](https://github.com/PaperMC/PaperDocs) workspace and install your local
 `paper-docs-theme` project as PIP package: `pip install -e path/to/your/paper-docs-theme`.
