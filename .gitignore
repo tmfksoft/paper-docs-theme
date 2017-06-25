@@ -191,6 +191,6 @@ jspm_packages
 .yarn-integrity
 
 
-### sponge-docs-theme ###
-sponge_docs_theme
+### paper-docs-theme ###
+paper_docs_theme
 !**/js/lib/

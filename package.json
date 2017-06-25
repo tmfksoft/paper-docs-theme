@@ -1,5 +1,5 @@
 {
-  "name": "sponge-docs-theme",
+  "name": "paper-docs-theme",
   "private": true,
   "devDependencies": {
     "cldr-core": "^30.0.3",

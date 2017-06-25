@@ -1,15 +1,15 @@
 from setuptools import setup
-import sponge_docs_theme
+import paper_docs_theme
 
 setup(
-    name='sponge-docs-theme',
-    version=sponge_docs_theme.__version__,
-    description='Theme for Sponge documentation',
-    url='https://github.com/SpongePowered/sponge-docs-theme',
-    author='SpongePowered',
+    name='paper-docs-theme',
+    version=paper_docs_theme.__version__,
+    description='Theme for PaperMC documentation',
+    url='https://github.com/PaperMC/paper-docs-theme',
+    author='PaperMC',
     license='MIT',
 
-    packages=['sponge_docs_theme'],
+    packages=['paper_docs_theme'],
     install_requires=['sphinx_rtd_theme==0.1.9'],
 
     message_extractors={
@@ -19,7 +19,7 @@ setup(
     },
 
     zip_safe=False,
-    package_data={'sponge_docs_theme': [
+    package_data={'paper_docs_theme': [
         '*.json',
         'favicon.ico',
         'theme.pot',

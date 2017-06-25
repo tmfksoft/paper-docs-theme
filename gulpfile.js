@@ -22,18 +22,18 @@ const
 
     webserver = require('gulp-webserver');
 
-gulp.task('clean', () => del(['sponge_docs_theme', 'dist', 'build']));
+gulp.task('clean', () => del(['paper_docs_theme', 'dist', 'build']));
 
 // Theme
 gulp.task('theme:files', () =>
     gulp.src('src/theme/{*.*,{static,templates}/**}')
-        .pipe(gulp.dest('sponge_docs_theme'))
+        .pipe(gulp.dest('paper_docs_theme'))
 );
 
 gulp.task('theme:svg', () =>
     gulp.src('src/theme/svg/**')
         .pipe(svgmin())
-        .pipe(gulp.dest('sponge_docs_theme/static'))
+        .pipe(gulp.dest('paper_docs_theme/static'))
 );
 
 gulp.task('theme:scripts', () =>
@@ -45,7 +45,7 @@ gulp.task('theme:scss', () =>
     gulp.src('src/theme/scss/spongedocs.scss')
         .pipe(sass())
         .pipe(cleanCSS())
-        .pipe(gulp.dest('sponge_docs_theme/static'))
+        .pipe(gulp.dest('paper_docs_theme/static'))
 );
 
 gulp.task('theme:js', () =>
@@ -61,7 +61,7 @@ gulp.task('theme:js', () =>
                 toplevel: true,
             },
         }))
-        .pipe(gulp.dest('sponge_docs_theme/static'))
+        .pipe(gulp.dest('paper_docs_theme/static'))
 );
 
 gulp.task('theme:js:worker', () =>
@@ -72,7 +72,7 @@ gulp.task('theme:js:worker', () =>
                 toplevel: true
             }
         }))
-        .pipe(gulp.dest('sponge_docs_theme/extra'))
+        .pipe(gulp.dest('paper_docs_theme/extra'))
 );
 
 gulp.task('theme:js:lib', () =>
@@ -80,12 +80,12 @@ gulp.task('theme:js:lib', () =>
         .pipe(uglify({
             preserveComments: 'license'
         }))
-        .pipe(gulp.dest('sponge_docs_theme/static'))
+        .pipe(gulp.dest('paper_docs_theme/static'))
 );
 
 
 gulp.task('theme:js:gettext', ['theme:files'],
-    shell('babel', 'python', ['setup.py', 'extract_messages', '-o', 'sponge_docs_theme/theme.pot'])
+    shell('babel', 'python', ['setup.py', 'extract_messages', '-o', 'paper_docs_theme/theme.pot'])
 );
 
 gulp.task('theme:build', ['theme:files', 'theme:svg', 'theme:scripts', 'theme:scss',
@@ -102,60 +102,7 @@ gulp.task('theme:watch', ['theme:build'], () => {
 
 gulp.task('theme', ['theme:watch']);
 
-// Homepage
-let renderData = null;
-
-gulp.task('homepage:load-data', () =>
-    !renderData && require('./src/homepage/data/spongedocs').loadData()
-        .then(data => renderData = data)
-);
-
-gulp.task('homepage:html', ['homepage:load-data'], () =>
-    gulp.src('src/homepage/html/*.html')
-        .pipe(nunjucksRender({
-            path: 'src/homepage/html',
-            data: renderData
-        }))
-        .pipe(htmlmin({
-            collapseBooleanAttributes: true,
-            collapseWhitespace: true,
-            removeComments: true,
-            minifyJS: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            sortAttributes: true,
-            sortClassName: true,
-            useShortDoctype: true
-        }))
-        .pipe(gulp.dest('dist/homepage'))
-);
-
-gulp.task('homepage:scss', () =>
-    gulp.src('src/homepage/scss/spongedocs.scss')
-        .pipe(sass())
-        .pipe(cleanCSS())
-        .pipe(gulp.dest('dist/homepage/_static/css'))
-);
-
-gulp.task('homepage:build', ['homepage:html', 'homepage:scss']);
-
-gulp.task('homepage:watch', ['homepage:build'], () => {
-    gulp.watch('src/homepage/html/**', ['homepage:html']);
-    gulp.watch('src/homepage/scss/**', ['homepage:scss']);
-});
-
-gulp.task('homepage:webserver', ['homepage:watch'], () => {
-    gulp.src('dist/homepage')
-        .pipe(webserver({
-            open: true,
-            livereload: true
-        }))
-});
-
-gulp.task('homepage', ['homepage:webserver']);
-
-gulp.task('build', ['theme:build', 'homepage:build']);
+gulp.task('build', ['theme:build']);
 gulp.task('default', ['build']);
 
 function shell(plugin, command, args) {
