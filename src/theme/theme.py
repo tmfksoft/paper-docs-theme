@@ -107,8 +107,8 @@ def setup(app):
     app.config.html_extra_path = [os.path.join(PACKAGE_DIR, 'extra')]
 
     # Load helper extensions for our theme
-    app.setup_extension('sponge_docs_theme.languages')
-    app.setup_extension('sponge_docs_theme.helpers')
+    app.setup_extension('paper_docs_theme.languages')
+    app.setup_extension('paper_docs_theme.helpers')
 
     # Register listener to set options when builder was initialized
     app.connect('builder-inited', init)
