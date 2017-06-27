@@ -25,3 +25,6 @@ run `gulp theme:watch`.
 
 To test the changes, setup a [PaperDocs](https://github.com/PaperMC/PaperDocs) workspace and install your local
 `paper-docs-theme` project as PIP package: `pip install -e path/to/your/paper-docs-theme`.
+
+##### Note
+_When running the pip commands under a normal user you may encounter file permission errors. Try adding --user to the end of the command._
